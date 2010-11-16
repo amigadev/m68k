@@ -1,0 +1,4 @@
+20030619:
+	- Started on instruction-storage rewrite. This might break functionality from time to time.
+20030617:
+	- Initial creation of changelog.

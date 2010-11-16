@@ -1,0 +1,161 @@
+	- Single characters ('e') are not parsed yet
+	- Matching of mnemonic must be done before parsing arguments, as some might require custom information. *DONE*
+	- Placing a space after a operand (like 'move.l #0 ,d0') causes parsing to fail.
+	- Add a symbol lookup-phase to getval() to resolve defined values
+	- Add support for FPU types
+
+	- Add a instruction-queue to allow for includes, macros and REPT-blocks. This will abstract the loading from
+	  the assembling.
+
+	- effective-address data-tagging *DONE*
+
+	- Generic expression solver which solves all values into single values.
+	  This will allow for proper management of equates and expressions within
+	  operands.
+
+	Future plans:
+
+	- Increase compatibility with phxass.
+
+		* Local symbol-referencing using 'Global\\Local'
+		* Add support for 'current source line' "*" (eg. bra *+4)
+
+	EQU
+	sym equ <expr>
+	sym = <expr>
+
+	EQU.x need fpu-support
+	sym equ.x <float expression>
+	sym =.x <float expression>
+
+	EQUR
+	sym equr <register>
+
+	REG
+	sym req	<register list>
+	sym rqurl <register list>
+
+	FREG need fpu-support
+	sym freg <register list> 
+	sym fequrl <register list>
+
+	FEQUR need fpu-support
+	sym fequr <fpu register>
+
+	SET
+	sym set <absolute expression>
+
+	SET.x need fpu-support
+	sym set.x	<float expression>
+
+	INT
+	sym int <float expression>
+
+	RSRESET,CLRSO
+	RSSET,SETSO
+	RS,SO
+
+	CLRFO
+	SETFO
+	FO
+
+	IDNT
+
+	SUBTTL ignore
+
+	COMMENT <text>
+
+	LIST
+	NOLIST
+
+	OPT
+	OPTC
+
+	MACRO
+	ENDM
+	MEXIT
+
+	END
+
+	FAIL
+
+	ECHO
+
+	MACHINE
+
+	FPU [<cpID>]
+
+	PMMU
+
+	SECTION <name>[,<type>[,<memflag>]]
+
+	CODE,CSEG (section "CODE",code)
+
+	DATA,DSEG (section "DATA",data)
+
+	CODE_C, CODE_F, DATA_C, BSS_C, BSS_F
+
+	BSS (section "BSS",bss
+
+	RORG
+
+	INCDIR
+
+	INCLUDE
+
+	INCBIN
+
+	XREF
+
+	NREF
+
+	XDEF
+
+	PUBLIC
+
+	ORG
+
+	LOAD
+
+	FILE
+
+	OUTPUT
+
+	SYMDEBUG
+
+	LINEDEBUG
+
+	BASEREG
+	ENDB
+
+	NEAR
+
+	FAR
+
+	INITNEAR
+
+	DCB,BLK
+
+	DS
+
+	CNOP
+
+	EVEN (cnop 0,2)
+
+	IF<cond>,ELSEIF,ELSE,ENDIF,ENDC
+		IFC,IFD/IFND,IFEQ/IFNE,IFGT/IFLT,IFGE/IFLE,IF
+
+	REPT,ENDR
+
+	SAVE,RESTORE
+
+	DEBUG
+	DSOURCE
+
+	SHOWOFFSET
+
+	ENDASM
+	ASM
+
+	REM
+	EREM

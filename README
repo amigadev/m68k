@@ -1,0 +1,86 @@
+m68k is a backend-assembler in the sense that it does not have any support for macros,
+and rely on that a pre-processing stage will feed mnemonics to it.
+
+UPDATE: macros will probably be supported, as it seems that adding support for it should
+be quite trivial.
+
+Supported addressing-modes:
+	Register Direct
+		Data				Dn
+		Address				An
+
+	Register Indirect
+		Address				(An)
+		Address with Postincrement	(An)+
+		Address with Predecrement	-(An)
+		Address with Displacement	(d16,An)
+
+	Address Register Indirect with Index
+		8-Bit Displacement		(d8,An,Xn)
+		Base Displacement		(bd,An,Xn)
+
+	Program Counter Indirect
+		with Displacement		(d16,PC)
+
+	Program Counter Indirect with Index
+		8-Bit Displacement		(d8,PC,Xn)
+		Base Displacement		(bd,PC,Xn)
+
+	Absolute Data Addressing
+		Short				(xxx).W
+		Long				(xxx).L
+
+	Immediate				#<xxx>
+
+Missing addressing-modes:
+	Memory Indirect
+		Postindexed			([bd,An],Xn,od)
+		Preindexed			([bd,An,Xn],od)
+
+	Program Counter Memory Indirect
+		Postindexed			([bd,PC],Xn,od)
+		Preindexed			([bd,PC,Xn],od)
+
+Full index-registers in the format of Xn.SIZE*SCALE are supported. The assembler
+also recognizes ZPC in place of PC in PC-relative mode and upgrades the addressing-
+mode to base-displaced mode (where the PC can be suppressed).
+
+Bitfields are processed and stored but not instructions currently use them.
+
+Features:
+	* Supports both the old (eg. d8(An,Xn)) and new (eg. (An,Xn,d8)) style
+	  of operands.
+
+
+
+Essential missing features:
+	SYMBOLS - We recognize but do not handle symbols yet. This is a major
+	feature that must be finished. Local and global symbols will be supported.
+	CPU - There is no way to specify which cpu certain parts of the code
+	is for, 'MACHINE' will be used for this purpose (a la phxass).
+
+Supported instructions:
+
+	ADD
+	ADDA
+	ADDQ
+	AND
+	ANDI
+	ANDI to CCR
+	CALLM
+	CLR
+	ILLEGAL
+	JMP
+	JSR
+	LEA
+	MOVE
+	MOVEQ
+	NOP
+	NOT
+	PEA
+	RTD
+	RTM
+	RTR
+
+	... this list will grow quickly, as addressing-modes are very loosly coupled to
+	the mnemonics themselves.
