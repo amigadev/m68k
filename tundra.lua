@@ -1,12 +1,10 @@
 local common = { }
 
-local glob = require "tundra.syntax.glob"
-
 Build {
 	Units = function()
 		Program {
 			Name = "m68k",
-			Sources = { glob.Glob { Dir = "src", Extensions = { ".c", ".h" } } }
+			Sources = { Glob { Dir = "src", Extensions = { ".c", ".h" } } }
 		}
 
 		Default "m68k"
